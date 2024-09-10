@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+
+{% block title %}Home - Big Stores{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row">
+        <!-- Sidebar -->
+        <nav id="sidebar" class="col-md-3 col-lg-2 d-md-block bg-light sidebar">
+            <div class="position-sticky">
+                <ul class="nav flex-column">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">categories</a>
+                        <ul class="collapse list-unstyled" id="categoriesSubmenu">
+                            {% for category in categories %}
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ url_for('main.get_category', category_id=category.id) }}">{{ category.name }}</a>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Designers</a>
+                        <ul class="collapse list-unstyled" id="designersSubmenu">
+                            {% for designer in designers %}
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ url_for('main.get_designer', designer_id=designer.id) }}">{{ designer.name }}</a>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+        
+            <!-- Jumbotron -->
+            <div class="jumbotron text-center">
+                <h1 class="display-4">Welcome to Big Stores</h1>
+                <p class="lead">Discover the latest fashion from local designers</p>
+            </div>
+
+            <!-- Recently Added Products -->
+            <div class="container">
+                <h2>Recently Added Products</h2>
+                <div class="row">
+                    {% for product in products %}
+                    <div class="col-md-4">
+                        <div class="card mb-4">
+                            <img src="{{ url_for('static', filename='products/uploads/' + product.image_file) }}" class="card-img-top" alt="{{ product.name }}">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ product.name }}</h5>
+                                <p class="card-text">{{ product.description }}</p>
+                                <p class="card-text"><strong>₵{{ product.price }}</strong></p>
+                                <p class="card-text">Location: {{ product.location }}</p>
+                            </div>
+                            <div class="card-footer text-center">
+                                <a href="" class="btn btn-primary">Add to Cart</a>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+
+                <!-- Our Designers -->
+                <h2>Our Designers</h2>
+                <div class="row">
+                    {% for designer in designers %}
+                    <div class="col-md-4">
+                        <div class="card mb-4">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ designer.name }}</h5>
+                                <p class="card-text">{{ designer.bio }}</p>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </main>
+    </div>
+</div>
+{% endblock %}

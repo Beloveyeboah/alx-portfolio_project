@@ -1,0 +1,15 @@
+{% extends 'admin/base.html' %}
+
+{% block content %}
+<h1>Edit Category</h1>
+<form method="POST" enctype="multipart/form-data">
+    {{ form.hidden_tag() }}
+    <div class="form-group">
+        {{ form.name.label }}<br>
+        {{ form.name(class="form-control") }}
+    </div>
+    <div class="form-group">
+        {{ form.submit(class="btn btn-primary") }}
+    </div>
+</form>
+{% endblock %}
